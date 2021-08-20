@@ -8,7 +8,7 @@ const [{user, fullName}, dispatch] = useStateValue();
 
     return(
         <div className="headerstrip">
-            <p>Welcome {fullName}</p>
+            <p style={{padding:'10px'}}>Welcome {fullName}</p>
         </div>
     )
 }

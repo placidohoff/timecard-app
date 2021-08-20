@@ -1,3 +1,6 @@
 .headerstrip{
     background-color: darkslategrey;
+    color: white;
+    font-weight: bold;
+    height: '100px';
 }

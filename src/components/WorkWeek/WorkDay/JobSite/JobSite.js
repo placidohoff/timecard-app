@@ -223,7 +223,7 @@ function JobSite(props){
                     }}
                 > */}
                     {/* <input type="text" value={date} style={{width: '55px', fontSize:'15px'}} /> */}
-                    <input type="text" className="borderBox" value={companyName} disabled={isReadOnly} onChange={e => {setCompanyName(e.target.value); setIsSaved(false)}} style={{width:'147px'}}/>
+                    <input type="text" className="borderBox" value={companyName} disabled={isReadOnly} onChange={e => {setCompanyName(e.target.value); setIsSaved(false)}} style={{width:'147px', fontSize:'12px'}}/>
                     <textarea className="borderBox" value={description} disabled={isReadOnly} onChange={e=> {setDescription(e.target.value); setIsSaved(false)}} rows='4' style={{resize:'none', height:'25px', width: '188px', fontSize:'9px'}}></textarea>
                     <TimeDropDown
                         type='in' 

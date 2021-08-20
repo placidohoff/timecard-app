@@ -4,7 +4,7 @@ import { useStateValue } from '../../util/StateProvider.js'
 import WorkDay from './WorkDay/WorkDay.js'
 import './WorkWeek.css'
 import { db } from '../../util/firebase.js'
-// import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 // import 'bootstrap/dist/css/bootstrap.min.css'
 
 
@@ -44,6 +44,26 @@ function WorkWeek(props){
     }
     const [totalHours, setTotalHours] = useState(getTotalHours())
 
+    const getNewDate = () => {
+        let rawDate = '';
+        let separator = '/'
+        let spacer = ' '
+        let newDate = new Date()
+        let date = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
+        // setIsDateChanged(false)
+
+                // return `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
+        rawDate = ` ${ month<10?`0${month}`:`${month}` } ${separator} ${date<10?`0${date}`:`${date}` } ${separator} ${year}`
+
+        let arrDate = rawDate.split('/')
+
+        let months = ['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec']
+        let abbrvMonth = months[Number(arrDate[0]-1)]
+        // return arrDate;
+        return  `${abbrvMonth} ${arrDate[1].trim()}, ${arrDate[2].trim()}`
+    }
     const addNew = (e) => {
         // if(location.state.type === 'resume'){
 
@@ -94,7 +114,7 @@ function WorkWeek(props){
     }
 
     const finalize = () => {
-        let weekName = prompt("Please enter this week's finish date")
+        let weekName = prompt("Please enter this week's finish date", getNewDate())
         try{db.collection(fullName).doc('--CurrentWeek').set({
             WorkWeek: currentWorkWeek.weekDays,
             isCurrentWeekOpen: false
@@ -117,7 +137,7 @@ function WorkWeek(props){
     }
 
     const dailyTotals = (obj) => {
-        console.log('TEST.....',obj.dayTotal)
+        // console.log('TEST.....',obj.dayTotal)
         // setTotalHours(obj.dayTotal)
 
 
@@ -131,7 +151,7 @@ function WorkWeek(props){
             })
         })
 
-        console.log('OTHER TEST...', tot)
+        // console.log('OTHER TEST...', tot)
         setTotalHours(tot)
     }
 
@@ -205,13 +225,22 @@ function WorkWeek(props){
     },[])
 
     return(
-        <div className="workweek">
+        <div className="workweek"
+            style={{margin:'auto'}}
+        >
+            <Container>
+                <Row>
+                    <Col></Col>
 
-
+        <Col
+            
+            style={{borderLeft: '1px solid black', borderBottom: '1px solid black'}}
+        >
             <div
                     style={{
                         display: 'flex',
-                        flexDirection: 'row'
+                        flexDirection: 'row',
+                        margin: 'auto'
                     }}
                 >
                     {/* <p
@@ -229,7 +258,8 @@ function WorkWeek(props){
                             // marginTop: '20px'
                             margin: 'auto',
                             marginTop: '10px',
-                            fontWeight: 'bold'
+                            fontWeight: 'bold',
+                            // marginLeft: '10vw'
                         }}
                     >
                         EMPLOYEE'S TIME CARD
@@ -240,6 +270,7 @@ function WorkWeek(props){
                 style={{
                     display: 'flex',
                     flexDirection: 'row'
+                    // marginLeft:'50px'
                 }}
             >
                 <div
@@ -266,7 +297,7 @@ function WorkWeek(props){
                     }}
                 >
                     
-                    <input type="text" className="bevel" value='Name: Test User' style={{width:'202px'}}/>
+                    <input type="text" className="bevel" value={`Name: `+ fullName} style={{width:'202px'}}/>
                     <input type="text" className="bevel" value={endOfWeek} onBlur={pushEndWeekChange} onChange={e => {setEndOfWeek(e.target.value); setIsEndWeekChanged(true)}} style={{}} />
                     <input type="text" className="bevel" value="" style={{width:'60px'}} />
                 </div>
@@ -346,22 +377,37 @@ function WorkWeek(props){
                 location.state.type === 'newWeek' || location.state.type === 'resume' ?
                 <>
                     <br />
+                    + &nbsp;
                     <button onClick={addNew}>
-                        Add New
+                        Add New Day
                     </button>
                     <br/><br/><br />
-                    <div style={{display:'flex', flexDirection:'row'}}>
-                        <button onClick={finalize}>
-                            Finalize Week
+                    {/* <Container>
+                        <Row>
+                            <Col></Col>
+                            <Col> */}
+                    <div style={{display:'flex', flexDirection:'row', marginLeft:'25%', marginBottom:'10px'}}>
+                        <button onClick={finalize} style={{backgroundColor:'#008020', color:'white', marginRight: '15px'}}>
+                            Finalize Time Card
                         </button>
-                        <button onClick={deleteCard}>
+                        <button onClick={deleteCard} style={{backgroundColor:'#800020', color:'white'}}>
                             Delete Time Card
                         </button>
                     </div>
+                    {/* </Col>
+                    <Col></Col>
+                    </Row>
+                    </Container> */}
                 </>
                 :
                     null
             }
+            </Col>
+            <Col
+                style={{borderLeft: '1px solid black'}}
+            ></Col>
+            </Row>
+            </Container>
 
         </div>
     )

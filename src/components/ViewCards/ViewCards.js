@@ -111,11 +111,61 @@ function ViewCards(){
 
         <div className="viewcards">
             <HeaderStrip />
+            <p 
+                style={{
+                    marginLeft: '5vh',
+                    fontWeight: 'bold',
+                    color: '#006080'
+                }}
+            >
+                Saved Time-Cards:
+            </p>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    overflowY: 'scroll',
+                    height: '70vh',
+                    width: '350px'
+                }}
+            >
+                {
+                    timeCardList.length > 1 ?
+                        timeCardList.map(timecard => (
+                            timecard.id ==="--CurrentWeek" ?
 
+                                null
+                            :
+                            <>
+                            <hr/>
+                            <div
+                                style={{display:'flex', flexDirection:'row', marginLeft:'20px'}}
+                            >
+                                
+                            <ListCard 
+                                timecard={timecard.timecard}
+                            />
+                                
+                            <button
+                                style={{height:'25px', marginTop: '30px', fontSize: '9px', backgroundColor:'#800020', color:'white'}}
+                                onClick={e => {db.collection(fullName).doc(timecard.timecard.WeekEnd).delete()}}
+                            > 
+                                DELETE
+                            </button>
+                            
+                            </div>
+                            
+                            </>
+                        ))
+                    :
+                    <p>There are 0 time-cards saved at this time.</p>
+                }
+            </div>
             <br />
             <div
                 style={{
-                    marginLeft: '20px'
+                    marginLeft: '10vw',
+                    marginTop: '4vh'
                 }}
             >
                 {
@@ -124,7 +174,7 @@ function ViewCards(){
                     <button
                         onClick={() => loadCurrentWorkWeek()}
                     >
-                        Current Work Week
+                        View Current Work Week
                     </button>
                 
                 :
@@ -133,7 +183,7 @@ function ViewCards(){
                          onClick={() => newWorkWeek()}
                     >
                     {console.log(timeCardList)}
-                    New Work Week
+                    New Time-Card
                     </button>
 
                 }
@@ -141,34 +191,7 @@ function ViewCards(){
 
             <br /><br /><br />
             
-                {
-                    timeCardList.map(timecard => (
-                        timecard.id ==="--CurrentWeek" ?
-
-                            null
-                        :
-                        <>
-                        <hr/>
-                        <div
-                            style={{display:'flex', flexDirection:'row', marginLeft:'20px'}}
-                        >
-                            
-                        <ListCard 
-                            timecard={timecard.timecard}
-                        />
-                            
-                        <button
-                            style={{height:'30px', marginTop: '0px'}}
-                            onClick={e => {db.collection(fullName).doc(timecard.timecard.WeekEnd).delete()}}
-                        > 
-                            X
-                        </button>
-                        
-                        </div>
-                        
-                        </>
-                    ))
-                }
+                
             
 
         </div>

@@ -16,6 +16,18 @@ function Login(){
     const [errorMessage, setErrorMessage] = useState('')
     const history = useHistory();
     
+    const guestUser = (e) => {
+        dispatch({
+            type: 'LOGIN',
+            item: {
+                user: 'guestUser@sample.com',
+                fullName: 'Guest User'
+            }
+        })
+        
+        history.push('/viewcards');
+
+    }
     const loginUser = (e) => {
         e.preventDefault();
     
@@ -60,19 +72,20 @@ function Login(){
 
     return(
         <div className="login">
-            <Container>
-                <Row>
+            <Container style={{minHeight:'100vh'}}>
+                <Row className="justify-content-center">
                     <Col></Col>
-                    <Col style={{marginTop: '20px'}}>
+                    <Col className="justify-content-center" style={{marginTop: '20px'}}>
+                <p style={{marginLeft:'25px', fontWeight:'bold'}}>TIME-CARD APPLICATION</p>
             <form>
-                
+                <div className="justify-content-md-center" style={{}}>
                 <input 
                     value={email}
                     onChange={e => {setEmail(e.target.value)}}
                     onBlur={e => {setName(getFullName(email))}}
                     type="text"
                     placeholder="email"
-                    style={{marginBottom: '10px'}}
+                    style={{marginBottom: '10px', width: '250px'}}
                 />
                 <br />
                 
@@ -81,9 +94,14 @@ function Login(){
                     onChange={e => {setPassword(e.target.value)}}
                     type="password"
                     placeholder="password"
-                    style={{marginBottom: '10px'}}
+                    style={{marginBottom: '10px', width: '250px'}}
                 />
+                </div>
                 <br />
+                <Container>
+                    <Row>
+                        <Col></Col>
+                        <Col>
                 <div
                     style={{
                         display: 'flex',
@@ -95,13 +113,29 @@ function Login(){
                         onClick={loginUser}
                         style={{
                             width: '100px',
-                            margin: 'auto'
+                            marginBottom: '10px'
+                            // margin: 'auto'
                             // marginTop: '5px'
                         }}
                     >
                         Login
                     </button>
+                    <button
+                        type="submit"
+                        onClick={guestUser}
+                        style={{
+                            width: '100px'
+                            // margin: 'auto'
+                            // marginTop: '5px'
+                        }}
+                    >
+                        Guest User
+                    </button>
                 </div>
+                </Col>
+                <Col></Col>
+                </Row>
+                </Container>
             </form>
             {
                 userError
@@ -114,6 +148,7 @@ function Login(){
             <Col></Col>
             </Row>
             </Container>
+            <Container style={{marginTop:'-20px'}}><Row><Col></Col><Col><p style={{fontSize: '8px', marginLeft:'6vw'}}>Developed by Placido Hoff</p></Col><Col></Col></Row></Container>
             
         </div>
         

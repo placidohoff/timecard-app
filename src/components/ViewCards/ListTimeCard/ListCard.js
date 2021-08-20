@@ -68,15 +68,15 @@ function ListCard(props){
             onClick={e => loadWorkWeek()}
             style={{
                 width:'200px',
-                border:'1px solid black',
+                // border:'1px solid black',
                 marginRight: '10px',
                 paddingLeft: '10px'
             }}
         >
-            {/* <hr /> */}
+            <hr />
             <p>{props.timecard.WeekEnd}</p> 
             <p>Total Hours: {props.timecard.TotalHours}</p> 
-            {/* <hr /> */}
+            <hr />
             {/* hello */}
             {console.log(props)}
         </div>
