@@ -76,9 +76,9 @@ function Login(){
                 <Row className="justify-content-center">
                     <Col></Col>
                     <Col className="justify-content-center" style={{marginTop: '20px'}}>
-                <p style={{marginLeft:'25px', fontWeight:'bold'}}>TIME-CARD APPLICATION</p>
+                <p style={{marginLeft:'7.5vw', fontWeight:'bold'}}>TIME-CARD APPLICATION</p>
             <form>
-                <div className="justify-content-md-center" style={{}}>
+                <div className="justify-content-md-center" style={{marginLeft:'5vw'}}>
                 <input 
                     value={email}
                     onChange={e => {setEmail(e.target.value)}}
@@ -148,7 +148,7 @@ function Login(){
             <Col></Col>
             </Row>
             </Container>
-            <Container style={{marginTop:'-20px'}}><Row><Col></Col><Col><p style={{fontSize: '8px', marginLeft:'6vw'}}>Developed by Placido Hoff</p></Col><Col></Col></Row></Container>
+            <Container style={{marginTop:'-20px'}}><Row><Col></Col><Col><p style={{fontSize: '10px', marginLeft:'9vw'}}>Developer: Placido Hoff</p></Col><Col></Col></Row></Container>
             
         </div>
         
