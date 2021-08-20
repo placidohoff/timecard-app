@@ -1,0 +1,8 @@
+.borderBox{
+    box-shadow: 
+  0 1px 1px #fff, /*bottom external highlight*/
+  0 -1px 1px #666, /*top external shadow*/ 
+  inset 0 -1px 1px rgba(0,0,0,0.5), /*bottom internal shadow*/ 
+  inset 0 1px 1px rgba(255,255,255,0.8); /*top internal highlight*/
+
+}

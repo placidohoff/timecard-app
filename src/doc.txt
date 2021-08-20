@@ -1,0 +1,9 @@
+CONTROLLER:
+
+1.) First, Creating the Routes with 'react-router-dom'
+    
+    import { BrowserRouter as Router, Switch, Route, useHistory, withRouter } from "react-router-dom"
+
+2.) Set up the reducer via initialState so that we can change routes live. 
+    ..*Process of initial state is as follows:
+     ..*React Context API
